@@ -40,10 +40,9 @@ export const addNote = api(
 
 export const editNote = api(
     {method: 'PUT', path: '/notes/:id', expose: true},
-    async ({ id, note }: { id: string, note: string }): Promise<Response> => {
+    async ({ id, note }: { id: number, note: string }): Promise<Response> => {
         try {
-            console.log(`UPDATE notes SET notes = "${note}" WHERE id = ${id}`);
-            await db.exec`UPDATE notes SET notes = "${note}" WHERE id = ${id};`;
+            await db.exec`UPDATE notes SET notes = ${note} WHERE id = ${id};`;
             return {
                 message: 'Note updated',
                 status: true
